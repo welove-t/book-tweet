@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { FieldsetHTMLAttributes } from 'react';
+import Header from '../components/lp/Header';
+import Hero from '../components/lp/Hero';
+import Features from '../components/lp/Features';
 
 const Home = () => {
-  return <h1>TEST</h1>;
+  return (
+    <>
+      <Header />
+      <Hero />
+      <Features />
+    </>
+  );
 };
 
 export default Home;

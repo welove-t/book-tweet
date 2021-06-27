@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Layout = ({ children }) => {
+const Header = () => {
   return (
     <div className="bg-blue-400">
-      <header className="container h-12 flex space-x-4 items-center">
+      <header className="container h-16 flex items-center">
         <Link href="/">
           <a className="font-bold text-2xl text-white">LOGO</a>
         </Link>
@@ -15,9 +15,8 @@ const Layout = ({ children }) => {
           </a>
         </Link>
       </header>
-      {children}
     </div>
   );
 };
 
-export default Layout;
+export default Header;
