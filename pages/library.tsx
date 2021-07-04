@@ -3,6 +3,7 @@ import Header from '../components/lp/Header';
 import Image from 'next/image';
 import { HeartIcon as HeartSolid } from '@heroicons/react/solid';
 import { HeartIcon as HeartOutline } from '@heroicons/react/outline';
+import Link from 'next/link';
 
 const library = () => {
   return (
@@ -40,10 +41,11 @@ const library = () => {
               <HeartSolid width={20} height={20} className="text-red-500" />
               <span className="ml-1">3</span>
             </div>
-
-            <a className="bg-blue-400 text-white rounded-md py-2 px-4">
-              詳細へ
-            </a>
+            <Link href="/books/id">
+              <a className="bg-blue-400 text-white rounded-md py-2 px-4">
+                詳細へ
+              </a>
+            </Link>
           </div>
         </div>
         {/* 2冊目 */}
