@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
+import BottomNavi from '../components/all/BottomNavi';
 import Footer from '../components/lp/Footer';
 import UserProvider from '../context/userContext';
 
@@ -14,6 +15,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <UserProvider>
       <Component {...pageProps} />
+      <BottomNavi />
       <Footer />
     </UserProvider>
   );
