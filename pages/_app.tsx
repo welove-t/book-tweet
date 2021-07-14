@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
 import Footer from '../components/lp/Footer';
+import UserProvider from '../context/userContext';
 
 const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -11,10 +12,10 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, []);
   return (
-    <>
+    <UserProvider>
       <Component {...pageProps} />
       <Footer />
-    </>
+    </UserProvider>
   );
 };
 
