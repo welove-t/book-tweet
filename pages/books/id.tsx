@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/lp/Header';
 import Image from 'next/image';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 
 const Id = () => {
   return (
@@ -23,7 +19,7 @@ const Id = () => {
           </h1>
         </div>
 
-        <form className="pt-4">
+        <form className="pt-4 text-center">
           <textarea
             name=""
             id=""
@@ -33,20 +29,7 @@ const Id = () => {
             className="border border-blue-400 rounded-md px-2 py-3 resize-none focus:outline-none focus:ring-1"
           ></textarea>
 
-          {/* <TextField
-            id="TweetArea"
-            label="ツイート内容"
-            multiline
-            rows={4}
-            defaultValue=""
-            variant="outlined"
-            className="w-full resize-none"
-          /> */}
           <div className="py-2 text-right">
-            <FormControlLabel
-              control={<Switch color="primary" />}
-              label="公開する"
-            />
             <button className="px-4 py-2 bg-blue-400 text-white rounded-md">
               保存
             </button>
