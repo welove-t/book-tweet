@@ -1,9 +1,12 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import Header from '../components/lp/Header';
 import Image from 'next/image';
+import BookSearchCard from '../components/search/BookSearchCard';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
+  //検索結果の保管ステート
+  const [bookList, setBookList] = useState([]);
 
   const searchBook = async () => {
     if (!searchInput) return null;
@@ -22,10 +25,20 @@ const Search = () => {
           ? item.imageLinks.smallThumbnail
           : '/images/book-no-image.jpg',
       };
-      console.log(book);
       return book;
     });
+    setBookList(bookData);
   };
+
+  //検索欄でエンター押下時
+  const onKeyDownSeach = (event: KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      searchBook();
+    }
+  };
+
   return (
     <div className="bg-green-400">
       <Header />
@@ -37,6 +50,7 @@ const Search = () => {
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               setSearchInput(event.target.value);
             }}
+            onKeyDown={(event) => onKeyDownSeach(event)}
             className="w-64 h-10 whitespace-nowrap p-2 border border-white rounded-l-md shadow-sm text-sm font-medium focus:outline-none"
             placeholder="本のタイトルを入力"
             maxLength={50}
@@ -61,54 +75,15 @@ const Search = () => {
         <p className="text-center">(最大10件)</p>
 
         <div className="grid grid-cols-2 gap-1 py-8 mx-auto place-items-center">
-          <div className="bg-white h-64 w-36 rounded-md p-1 text-center">
-            <figure className="h-36 grid justify-center align-center">
-              <Image
-                src="http://books.google.com/books/content?id=JHD1DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-                alt=""
-                width={100}
-                height={160}
-              ></Image>
-            </figure>
-            <p className="p-2 h-14 font-semibold text-sm mb-2 line-clamp-3 leading-4">
-              ９割捨てて10倍伝わる「要約力」　最短・最速のコミュニケーションで成果は最大化する
-            </p>
-            <button className="bg-blue-400 text-white text-sm shadow rounded-full px-4 py-2 focus:outline-none hover:shadow-md">
-              ライブラリ登録
-            </button>
-          </div>
-          <div className="bg-white h-64 w-36 rounded-md p-1 text-center">
-            <figure className="h-36 grid justify-center align-center">
-              <Image
-                src="http://books.google.com/books/content?id=wVm0DAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-                alt=""
-                width={100}
-                height={160}
-              ></Image>
-            </figure>
-            <p className="p-2 h-14 font-semibold text-sm mb-2 line-clamp-3 leading-4">
-              罪と罰（上）
-            </p>
-            <button className="bg-blue-400 text-white text-sm shadow rounded-full px-4 py-2 focus:outline-none hover:shadow-md">
-              ライブラリ登録
-            </button>
-          </div>
-          <div className="bg-white h-64 w-36 rounded-md p-1 text-center">
-            <figure className="h-36 grid justify-center align-center">
-              <Image
-                src="http://books.google.com/books/content?id=6WKqDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-                alt=""
-                width={100}
-                height={160}
-              ></Image>
-            </figure>
-            <p className="p-2 h-14 font-semibold text-sm mb-2 line-clamp-3 leading-4">
-              働き方の哲学 360度の視点で仕事を考える
-            </p>
-            <button className="bg-blue-400 text-white text-sm shadow rounded-full px-4 py-2 focus:outline-none hover:shadow-md">
-              ライブラリ登録
-            </button>
-          </div>
+          {bookList &&
+            bookList.map((book, idx) => (
+              <BookSearchCard
+                bid={book.bid}
+                imgUrl={book.imageUrl}
+                title={book.title}
+                key={idx}
+              />
+            ))}
         </div>
       </div>
     </div>
