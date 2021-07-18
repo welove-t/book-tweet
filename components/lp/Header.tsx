@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 
 const Header = () => {
   const login = () => {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider());
   };
   const { user, loadingUser } = useUser();
 
