@@ -11,7 +11,7 @@ const BookSearchCard = ({ bid, title, imgUrl }) => {
     const createdAt = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     user &&
       firebase.firestore().doc(`users/${user.uid}/books/${bid}`).set({
-        name: title,
+        title: title,
         imgUrl: imgUrl,
         createdAt: createdAt,
         comment: '',
