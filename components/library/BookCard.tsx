@@ -16,7 +16,7 @@ export const BookCard = ({ data }) => {
       <p className="p-1 text-gray-500 mb-4">{data.comments}</p>
       <div className="flex items-center justify-between px-2 pt-1 border-t">
         <div>
-          登録日:<span>{data.createdAt}</span>
+          登録日:<span>{data.createdAt.substr(0, 10)}</span>
         </div>
         <div className="flex items-center">
           <HeartSolid width={20} height={20} className="text-red-500" />

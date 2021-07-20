@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 const BookSearchCard = ({ bid, title, imgUrl }) => {
   const { user } = useUser();
   const addBook = () => {
-    const createdAt = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    const createdAt = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
     user &&
       firebase.firestore().doc(`users/${user.uid}/books/${bid}`).set({
         title: title,
