@@ -31,7 +31,7 @@ const Library = () => {
   }, [user]);
 
   return (
-    <div className="bg-blue-50">
+    <div className="bg-blue-50 pb-4">
       <Header />
       <div className="container">
         <h1 className="py-8 text-center font-bold text-2xl">マイライブラリ</h1>
