@@ -2,6 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import Header from '../components/lp/Header';
 import Image from 'next/image';
 import BookSearchCard from '../components/search/BookSearchCard';
+import { Toaster } from 'react-hot-toast';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -86,6 +87,7 @@ const Search = () => {
             ))}
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

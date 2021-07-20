@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Image from 'next/image';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 import { useUser } from '../../context/userContext';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
 
 const BookSearchCard = ({ bid, title, imgUrl }) => {
   const { user } = useUser();
   const addBook = () => {
     const createdAt = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
     user &&
-      firebase.firestore().doc(`users/${user.uid}/books/${bid}`).set({
-        title: title,
-        imgUrl: imgUrl,
-        createdAt: createdAt,
-        comment: '',
-      });
+      firebase
+        .firestore()
+        .doc(`users/${user.uid}/books/${bid}`)
+        .set({
+          title: title,
+          imgUrl: imgUrl,
+          createdAt: createdAt,
+          comment: '',
+        })
+        .then(() => {
+          toast.success('ライブラリに登録しました');
+        });
   };
+
   return (
     <div className="bg-white h-64 w-36 rounded-md p-1 text-center">
       <figure className="h-36 grid justify-center align-center">
