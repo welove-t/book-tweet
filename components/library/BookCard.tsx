@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HeartIcon as HeartSolid } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
 
 export const BookCard = ({ data }) => {
+  useEffect(() => {
+    console.log(data);
+  });
+  const router = useRouter();
+  //本詳細画面へ
+  const toBookDetail = () => {
+    router.push({
+      pathname: `/library/${data.bid}`,
+      query: { title: data.title, imgUrl: data.imgUrl },
+    });
+  };
   return (
     <div className="bg-white border rounded-md p-1 pb-2 mb-2 relative">
       <div className="flex relative h-32 w-80">
@@ -22,9 +34,21 @@ export const BookCard = ({ data }) => {
           <HeartSolid width={20} height={20} className="text-red-500" />
           <span className="ml-1">3</span>
         </div>
-        <Link href="/books/id">
+        <Link
+          href={{
+            pathname: `/library/${data.bid}`,
+            query: { title: data.title, imgUrl: data.imgUrl },
+          }}
+        >
           <a className="bg-blue-400 text-white rounded-md py-2 px-4">詳細へ</a>
         </Link>
+
+        {/* <a
+          className="bg-blue-400 text-white rounded-md py-2 px-4"
+          onClick={toBookDetail}
+        >
+          詳細へ
+        </a> */}
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const Library = () => {
         .get()
         .then((items) => {
           const res = items.docs.map((doc) => {
-            return doc.data();
+            return { bid: doc.id, ...doc.data() };
           });
           setLibraryBooks(res);
         })

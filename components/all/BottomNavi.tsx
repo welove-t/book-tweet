@@ -22,17 +22,17 @@ const BottomNavi = () => {
         className="w-96 max-w-md space-x-4"
       >
         <BottomNavigationAction
-          value="library"
+          value="/library"
           label="ライブラリ"
           icon={<LibraryBooksIcon />}
         />
         <BottomNavigationAction
-          value="search"
+          value="/search"
           label="本を探す"
           icon={<SearchIcon />}
         />
         <BottomNavigationAction
-          value="settings"
+          value="/settings"
           label="設定"
           icon={<SettingsIcon />}
         />
