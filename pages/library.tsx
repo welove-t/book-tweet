@@ -15,10 +15,8 @@ const Library = () => {
         .get()
         .then((items) => {
           const res = items.docs.map((doc) => {
-            console.log(doc.data);
             return doc.data();
           });
-          console.log(res);
           setLibraryBooks(res);
         })
         .catch(() => {
@@ -31,14 +29,26 @@ const Library = () => {
   }, [user]);
 
   return (
-    <div className="bg-blue-50 pb-4">
+    <div className="bg-blue-50 pb-40">
       <Header />
       <div className="container">
         <h1 className="py-8 text-center font-bold text-2xl">マイライブラリ</h1>
-        {libraryBooks &&
-          libraryBooks.map((book, idx) => (
-            <BookCard data={book} key={idx}></BookCard>
-          ))}
+        {libraryBooks ? (
+          libraryBooks.length === 0 ? (
+            <div className="text-center text-gray-500 pt-8 pb-80">
+              <p>ライブラリに本はありません</p>
+              <p>本を検索してライブラリに登録して下さい</p>
+            </div>
+          ) : (
+            libraryBooks.map((book, idx) => (
+              <BookCard data={book} key={idx}></BookCard>
+            ))
+          )
+        ) : (
+          <div className="text-center text-gray-500">
+            <p>読み込み中</p>
+          </div>
+        )}
       </div>
     </div>
   );
