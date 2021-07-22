@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import Header from '../../components/lp/Header';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const Id = () => {
+const BookDetail = () => {
+  const router = useRouter();
+  const title = router.query.title;
+  const imgUrl = router.query.imgUrl as string;
+  useEffect(() => {
+    console.log(imgUrl);
+  });
   return (
     <div>
       <Header />
       <div className="container">
         <div className="text-center pt-4">
-          <Image
-            src="http://books.google.com/books/content?id=JHD1DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-            alt=""
-            width={128}
-            height={185}
-          ></Image>
-          <h1 className="font-bold text-lg pt-2">
-            ９割捨てて10倍伝わる「要約力」　最短・最速のコミュニケーションで成果は最大化する
-          </h1>
+          <Image src={imgUrl} alt="" width={128} height={185}></Image>
+          <h1 className="font-bold text-lg pt-2">{title}</h1>
         </div>
 
         <form className="pt-4 text-center">
@@ -45,4 +46,4 @@ const Id = () => {
   );
 };
 
-export default Id;
+export default BookDetail;
