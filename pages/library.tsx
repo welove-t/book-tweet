@@ -3,6 +3,7 @@ import Header from '../components/lp/Header';
 import { BookCard } from '../components/library/BookCard';
 import firebase from 'firebase/app';
 import { useUser } from '../context/userContext';
+import { Toaster } from 'react-hot-toast';
 
 const Library = () => {
   const { user } = useUser();
@@ -50,6 +51,7 @@ const Library = () => {
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 };
