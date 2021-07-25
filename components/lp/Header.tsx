@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useUser } from '../../context/userContext';
 import firebase from 'firebase/app';
 import Image from 'next/image';
+import MenuBar from '../all/MenuBar';
+import { Toaster } from 'react-hot-toast';
 
 const Header = () => {
   const login = () => {
@@ -18,27 +20,12 @@ const Header = () => {
         </Link>
         <span className="flex-1"></span>
 
-        {/* <Link href="/library">
-          <a
-            className="text-white border border-white rounded-md py-2 px-4"
-            onClick={login}
-          >
-            ログイン
-          </a>
-        </Link> */}
-
         {loadingUser ? (
           <div className="animate-pulse">
             <div className="h-12 w-12 rounded-full bg-gray-300"></div>
           </div>
         ) : user ? (
-          <Image
-            src={user.photoURL}
-            alt=""
-            width={48}
-            height={48}
-            className="rounded-full h-full w-full"
-          ></Image>
+          <MenuBar />
         ) : (
           <a
             className="text-white border border-white rounded-md py-2 px-4"
@@ -48,6 +35,7 @@ const Header = () => {
           </a>
         )}
       </header>
+      <Toaster />
     </div>
   );
 };
