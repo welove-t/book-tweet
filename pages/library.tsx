@@ -34,20 +34,26 @@ const Library = () => {
       <Header />
       <div className="container">
         <h1 className="py-8 text-center font-bold text-2xl">マイライブラリ</h1>
-        {libraryBooks ? (
-          libraryBooks.length === 0 ? (
-            <div className="text-center text-gray-500 pt-8 pb-80">
-              <p>ライブラリに本はありません</p>
-              <p>本を検索してライブラリに登録して下さい</p>
-            </div>
+        {user ? (
+          libraryBooks ? (
+            libraryBooks.length === 0 ? (
+              <div className="text-center text-gray-500 pt-8 pb-80">
+                <p>ライブラリに本はありません</p>
+                <p>本を検索してライブラリに登録して下さい</p>
+              </div>
+            ) : (
+              libraryBooks.map((book, idx) => (
+                <BookCard data={book} key={idx}></BookCard>
+              ))
+            )
           ) : (
-            libraryBooks.map((book, idx) => (
-              <BookCard data={book} key={idx}></BookCard>
-            ))
+            <div className="text-center text-gray-500">
+              <p>読み込み中</p>
+            </div>
           )
         ) : (
-          <div className="text-center text-gray-500">
-            <p>読み込み中</p>
+          <div className="text-center text-gray-500 pt-4 pb-80">
+            <p>ログインして下さい</p>
           </div>
         )}
       </div>
