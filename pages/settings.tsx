@@ -5,6 +5,7 @@ import { useUser } from '../context/userContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { Dialog, Transition } from '@headlessui/react';
 import firebase from 'firebase/app';
+import 'firebase/functions';
 import { useRouter } from 'next/router';
 
 const Settings = () => {
@@ -29,6 +30,7 @@ const Settings = () => {
     callable({})
       .then(() => {
         router.push('/');
+        toast.success('アカウント削除しました');
       })
       .catch(() => {
         console.error('アカウント削除失敗しました！');
@@ -140,6 +142,7 @@ const Settings = () => {
           </div>
         </Dialog>
       </Transition>
+      <Toaster />
     </div>
   );
 };
