@@ -16,9 +16,6 @@ const Settings = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const openModal = () => {
-    setIsOpen(true);
-  };
   // アカウント削除
   const deleteUser = () => {
     closeModal();
@@ -42,9 +39,9 @@ const Settings = () => {
       <div className="container">
         <h1 className="pt-4 text-center font-bold text-xl">ユーザー設定</h1>
 
-        <div className="pt-8 flex flex-col items-center space-y-4">
-          {user && (
-            <>
+        {user ? (
+          <>
+            <div className="pt-8 flex flex-col items-center space-y-4">
               <div className="">
                 <Image
                   src={user.photoURL}
@@ -57,21 +54,25 @@ const Settings = () => {
               <div>
                 <p className="font-semibold">{user.displayName}</p>
               </div>
-            </>
-          )}
 
-          <p className="text-gray-600">
-            このサイトではプロフィールの変更はできません。Twitterのアカウント情報がそのまま反映されます。(ログイン時に反映されます。)
-          </p>
-        </div>
-        <div className="text-right py-4">
-          <a
-            className="opacity-50 underline hover:opacity-30 cursor-pointer"
-            onClick={() => setIsOpen(true)}
-          >
-            アカウントを削除
-          </a>
-        </div>
+              <p className="text-gray-600">
+                このサイトではプロフィールの変更はできません。Twitterのアカウント情報がそのまま反映されます。(ログイン時に反映されます。)
+              </p>
+            </div>
+            <div className="text-right pt-8 pb-4">
+              <a
+                className="opacity-50 underline hover:opacity-30 cursor-pointer"
+                onClick={() => setIsOpen(true)}
+              >
+                アカウントを削除→
+              </a>
+            </div>
+          </>
+        ) : (
+          <div className="text-center pt-8 pb-60 text-gray-500">
+            ログインして下さい
+          </div>
+        )}
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
