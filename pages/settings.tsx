@@ -26,8 +26,16 @@ const Settings = () => {
       .httpsCallable('deleteUser');
     callable({})
       .then(() => {
-        router.push('/');
-        toast.success('アカウント削除しました');
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            router.push('/');
+            toast.success('アカウント削除しました');
+          })
+          .catch(() => {
+            console.error('ログアウト失敗しました！');
+          });
       })
       .catch(() => {
         console.error('アカウント削除失敗しました！');
