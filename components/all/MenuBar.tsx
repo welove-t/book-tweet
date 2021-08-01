@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { LibraryIcon, CogIcon, LogoutIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ const MenuBar = () => {
   const toSettings = () => {
     router.push('/settings');
   };
-  const logout = () => {
+  const logout = useCallback(() => {
     firebase
       .auth()
       .signOut()
@@ -27,7 +27,7 @@ const MenuBar = () => {
       .catch(() => {
         console.log('error!!!');
       });
-  };
+  }, []);
 
   return (
     <Popover>
