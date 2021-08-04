@@ -124,12 +124,12 @@ const BookDetail = () => {
             }}
           ></textarea>
 
-          <div className="py-2 text-right">
+          <div className="py-2 text-center">
             <a
               onClick={addTweetComment}
               className="px-4 py-2 bg-blue-400 text-white rounded-md"
             >
-              保存
+              画像を生成する
             </a>
           </div>
           <div className="text-center py-4">
