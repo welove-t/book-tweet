@@ -12,6 +12,13 @@ import firebase from 'firebase/app';
 import { useUser } from '../../context/userContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { Dialog, Transition } from '@headlessui/react';
+import CreateImage from '../../components/bookId/CreateImage';
+
+type books = {
+  title: string;
+  imgUrl: string;
+  comment: string;
+};
 
 const BookDetail = () => {
   const router = useRouter();
@@ -19,13 +26,6 @@ const BookDetail = () => {
   const bookId = router.query.id;
   // 本削除時のダイアログ表示ステイト
   const [isOpen, setIsOpen] = useState(false);
-
-  // canvas用
-  const [bgColor, setBgColor] = useState<string>('#888888');
-  const [foColor, setFoColor] = useState<string>('#000000');
-  const [png, setPng] = useState<string | null>(null);
-  const width = 350;
-  const height = 255;
 
   const closeModal = () => {
     setIsOpen(false);
@@ -35,7 +35,7 @@ const BookDetail = () => {
   };
 
   // 本詳細データのステイト;
-  const [bookData, setBookData] = useState({
+  const [bookData, setBookData] = useState<books>({
     title: '',
     imgUrl: '',
     comment: '',
@@ -63,27 +63,6 @@ const BookDetail = () => {
   useEffect(() => {
     getBookData();
   }, []);
-
-  useEffect(() => {
-    const canvasElem = document.createElement('canvas');
-    canvasElem.width = width;
-    canvasElem.height = height;
-
-    const ctx = canvasElem && canvasElem.getContext('2d');
-    if (!canvasElem || !ctx) return;
-
-    // draw
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, width, height);
-
-    ctx.font = '30px Hiragino Maru Gothic Pro';
-    ctx.fillStyle = foColor;
-    ctx.fillText(bookData.comment, width / 6, height / 2);
-
-    setPng(canvasElem.toDataURL());
-  }, [bgColor, foColor, bookData.comment]);
 
   // 本の削除
   const deleteBook = () => {
@@ -125,6 +104,7 @@ const BookDetail = () => {
         <div className="text-center pt-4">
           {bookData.imgUrl ? (
             <Image
+              id="bookImage_canvas"
               src={bookData.imgUrl}
               alt=""
               width={128}
@@ -174,41 +154,7 @@ const BookDetail = () => {
             </a>
           </div>
         </form>
-        <div>
-          <h3>画像生成</h3>
-          <h4>背景色</h4>
-          {['#f00', '#0f0', '#00f'].map((color) => (
-            <button
-              key={color}
-              style={{ background: color }}
-              onClick={() => setBgColor(color)}
-            >
-              {color}
-            </button>
-          ))}
-          <h4>文字色</h4>
-          {['#f00', '#0f0', '#00f'].map((color) => (
-            <button
-              key={color}
-              style={{ color }}
-              onClick={() => setFoColor(color)}
-            >
-              {color}
-            </button>
-          ))}
-          <h4>生成</h4>
-          {png && (
-            <div className="text-center">
-              <Image
-                alt="icon"
-                src={png}
-                height={height}
-                width={width}
-                className="rounded-lg"
-              />
-            </div>
-          )}
-        </div>
+        <CreateImage data={bookData} />
       </div>
       <Toaster />
       <Transition appear show={isOpen} as={Fragment}>
